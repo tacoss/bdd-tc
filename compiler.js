@@ -109,6 +109,8 @@ function compile(params) {
             }
           }
         }
+
+        throw new Error(`Unmatched step for: ${step}\n  ${feature.filepath}`);
       });
     });
 
