@@ -3,6 +3,10 @@ import pages from '../helpers/pages';
 let page;
 
 export default {
+  matchers: {
+    find: '(?:search|query)',
+  },
+
   'Given open "$searchEngine" URL' (searchEngine) {
     page = pages[searchEngine];
 
@@ -11,7 +15,7 @@ export default {
       .expect(page.body.visible).ok();
   },
 
-  'When I search for "$searchQuery"' (searchQuery) {
+  'When I $find for "$searchQuery"' (searchQuery) {
     await t
       .typeText(page.search.input, searchQuery)
       .click(page.search.submit);
