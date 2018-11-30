@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node main && testcafe chrome:headless e2e/cases"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,8 @@
     "fs-extra": "^7.0.1",
     "lodash.template": "^4.4.0",
     "yadda": "^2.0.0"
+  },
+  "devDependencies": {
+    "testcafe": "^0.23.2"
   }
 }

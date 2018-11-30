@@ -3,7 +3,7 @@
 test<%= scenario.annotations.url ? `\n  .page(${JSON.stringify(scenario.annotations.url)})` : '' %>
   (<%= JSON.stringify(scenario.title) %>, async t => {
   <% scenario.steps.forEach(step => { %>
-  await (async /**! <%= step.name %> */ step<%= step.code %>)(<%= JSON.stringify(step.data) %>);
+  await /**! <%= step.name %> */ (async function step<%= step.code %>)(<%= JSON.stringify(step.data) %>);
   <% }) %>
   });
 <% }); %>

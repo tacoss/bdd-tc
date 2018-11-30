@@ -2,9 +2,10 @@ import { Selector } from 'testcafe';
 
 const GoogleSearchPage = {
   url: 'http://google.com',
+  body: Selector('body'),
   search: {
     input: Selector('input[type=text]'),
-    submit: Selector('button[name=btnG]'),
+    submit: Selector('input[name=btnK]'),
     output: Selector('#ires'),
   },
 };
@@ -14,13 +15,11 @@ const pages = { GoogleSearchPage };
 
 export default {
   'Given at $pageName' ({ pageName }) {
-    const PageClass = pages[pageName];
-
-    page = new PageClass();
+    page = pages[pageName];
 
     await t
       .navigateTo(page.url)
-      .expect(this.body.visible).ok();
+      .expect(page.body.visible).ok();
   },
 
   'When I search for "$searchQuery"' ({ searchQuery }) {
@@ -31,6 +30,6 @@ export default {
 
   'Then should I see "$searchResult"' ({ searchResult }) {
     await t
-      .expect(this.search.output.innerText).eql(searchResult);
+      .expect(page.search.output.innerText).eql(searchResult);
   },
 };
