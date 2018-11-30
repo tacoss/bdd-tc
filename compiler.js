@@ -52,15 +52,21 @@ function compileSteps(params) {
     vm.createContext(sandbox);
     vm.runInContext(`steps=${steps}`, sandbox);
 
-    Object.keys(sandbox.steps).forEach(label => {
+    const fixtures = Object.keys(sandbox.steps).map(label => {
       let code = sandbox.steps[label].toString().substr(label.length + 2).trim();
 
       code = code.replace(RE_AWAIT_UNCOMMENT, 'await');
 
-      prev.push({
+      return {
         name: compileMatcher(label),
         code,
-      });
+      };
+    });
+
+    prev.push({
+      filepath: step,
+      content: prelude,
+      steps: fixtures,
     });
 
     return prev;
@@ -74,30 +80,42 @@ function compile(params) {
   const stepMatcher = compileSteps(params);
 
   compileFeatures(params).forEach(feature => {
+    const usedSteps = [];
+    const prelude = [];
+
     feature.scenarios.forEach(scenario => {
       scenario.steps = scenario.steps.map(step => {
         for (let i = 0; i < stepMatcher.length; i += 1) {
-          const values = step.match(stepMatcher[i].name.matcher);
+          const test = stepMatcher[i];
 
-          if (values) {
-            return {
-              data: values.slice(1).reduce((prev, cur, j) => {
-                prev[stepMatcher[i].name.arguments[j]] = cur;
-                return prev;
-              }, {}),
-              code: stepMatcher[i].code,
-              name: step,
-            };
+          for (let j = 0; j < test.steps.length; j += 1) {
+            const info = test.steps[j];
+            const values = step.match(info.name.matcher);
+
+            if (values) {
+              if (!usedSteps.includes(test.filepath)) {
+                usedSteps.push(test.filepath);
+                prelude.push(test.content);
+              }
+
+              return {
+                data: values.slice(1).reduce((prev, cur, j) => {
+                  prev[info.name.arguments[j]] = cur;
+                  return prev;
+                }, {}),
+                code: info.code,
+                name: step,
+              };
+            }
           }
         }
       });
     });
 
     const testFile = path.join(params.destDir, `cases/${feature.relative}.js`);
-    const prelude = '';
 
     fs.outputFileSync(testFile, renderFile({
-      prelude,
+      banner: prelude.join(''),
       feature,
     }));
   });
