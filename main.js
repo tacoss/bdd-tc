@@ -1,9 +1,9 @@
 const compiler = require('./lib/compiler');
 
-const destDir = `${__dirname}/e2e`;
-const srcDir = `${__dirname}/tests`;
-const copy = [`${__dirname}/tests/helpers`];
-const stepFiles = [`${__dirname}/tests/steps/searching.js`];
+const destDir = `${__dirname}/generated`;
+const srcDir = `${__dirname}/tests/e2e`;
+const copy = [`${__dirname}/tests/e2e/helpers`];
+const stepFiles = [`${__dirname}/tests/e2e/steps/searching.js`];
 
 compiler({
   copy,

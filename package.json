@@ -4,7 +4,7 @@
   "description": "PoC: Testcafé codegen from Yadda features",
   "main": "main.js",
   "scripts": {
-    "test": "node main && testcafe chrome:headless e2e/cases"
+    "test": "node main && testcafe chrome:headless generated/cases"
   },
   "keywords": [
     "testcafe",
