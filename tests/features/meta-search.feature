@@ -8,5 +8,6 @@ Scenario: Searching for "[VALUE]" on [ENGINE]
 
   Examples:
     ENGINE | VALUE         | RESULT
-    Google | testcafe.js   | DevExpress
+    Bing   | agavelab      | Agave Lab: Home
+    Yahoo  | testcafe.js   | DevExpress
     Google | nightwatch.js | nightwatchjs.org
