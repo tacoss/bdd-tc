@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe';
 
-const GoogleSearchPage = {
+const Google = {
   url: 'http://google.com',
   body: Selector('body'),
   search: {
@@ -11,11 +11,11 @@ const GoogleSearchPage = {
 };
 
 let page;
-const pages = { GoogleSearchPage };
+const pages = { Google };
 
 export default {
-  'Given at $pageName' ({ pageName }) {
-    page = pages[pageName];
+  'Given open "$searchEngine" URL' ({ searchEngine }) {
+    page = pages[searchEngine];
 
     await t
       .navigateTo(page.url)
