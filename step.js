@@ -30,6 +30,6 @@ export default {
 
   'Then should I see "$searchResult"' ({ searchResult }) {
     await t
-      .expect(page.search.output.innerText).eql(searchResult);
+      .expect(page.search.output.innerText).contains(searchResult);
   },
 };

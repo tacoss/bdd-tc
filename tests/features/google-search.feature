@@ -1,7 +1,7 @@
 Feature: Demo test Google
 
-Scenario: Open Google and search for "nightwatch js"
+Scenario: Open Google and search for "agavelab"
 
   Given at GoogleSearchPage
-  When I search for "nightwatch js"
-  Then should I see "Node.js powered End-to-End testing framework"
+  When I search for "agavelab"
+  Then should I see "Agave Lab: Home"
