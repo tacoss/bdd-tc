@@ -1,0 +1,7 @@
+*.log
+*.todo
+.nyc_output
+e2e
+coverage
+generated
+node_modules
