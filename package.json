@@ -1,14 +1,27 @@
 {
-  "name": "bdd-testcafe",
+  "name": "yadda-testcafe",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "PoC: Testcafé codegen from Yadda features",
+  "main": "main.js",
   "scripts": {
     "test": "node main && testcafe chrome:headless e2e/cases"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "testcafe",
+    "codegen",
+    "yadda",
+    "bdd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agave/yadda-testcafe"
+  },
+  "bugs": "https://github.com/agave/yadda-testcafe/issues",
+  "author": "Agave Lab <oss@agavelab.com> (https://agavelab.com)",
+  "maintainers": [
+    "Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)"
+  ],
+  "license": "MIT",
   "dependencies": {
     "fs-extra": "^7.0.1",
     "lodash.template": "^4.4.0",
