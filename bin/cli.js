@@ -35,7 +35,7 @@ try {
     stepFiles: toArray(argv.flags.steps),
   });
 
-  process.stdout.write(argv.flags.dest);
+  process.stdout.write(`${argv.flags.dest}/cases`);
 } catch (e) {
   process.stderr.write(e.message);
   process.exit(1);
