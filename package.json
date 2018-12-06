@@ -25,6 +25,7 @@
   "dependencies": {
     "fs-extra": "^7.0.1",
     "lodash.template": "^4.4.0",
+    "wargs": "^0.8.2",
     "yadda": "^2.0.0"
   },
   "devDependencies": {
