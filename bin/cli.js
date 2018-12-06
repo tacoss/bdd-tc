@@ -16,6 +16,10 @@ const argv = wargs(process.argv.slice(2), {
   },
 });
 
+const onClose = process.version.split('.')[1] === '6' ? 'exit' : 'close';
+
+let child;
+
 function toArray(value) {
   if (!value) {
     return [];
@@ -30,9 +34,46 @@ function toArray(value) {
     : value;
 }
 
-try {
-  const compiler = require('../lib/compiler');
+const { spawn } = require('child_process');
 
+function exec(sources) {
+  const cmd = argv.raw.concat(sources);
+
+  process.stdout.write(`\rExecuting \`${cmd.join(' ')}\` ...\n`);
+
+  if (child) {
+    child.kill('SIGINT');
+  }
+
+  child = spawn(cmd[0], cmd.slice(1), {
+    cwd: process.cwd(),
+    detached: true,
+  });
+
+  child.stdout.pipe(process.stdout);
+
+  const errors = [];
+
+  child.stderr.on('data', data => {
+    const line = data.toString().trim();
+
+    if (line) {
+      errors.push(line);
+    }
+  });
+
+  child.on(onClose, exitCode => {
+    if (errors.length) {
+      process.stderr.write(errors.join(''));
+    }
+
+    process.exit(exitCode);
+  });
+}
+
+const compiler = require('../lib/compiler');
+
+try {
   compiler({
     srcDir: argv.flags.src,
     destDir: argv.flags.dest,
@@ -40,8 +81,22 @@ try {
     stepFiles: toArray(argv.flags.steps),
   });
 
-  process.stdout.write(`${argv.flags.dest}/cases`);
+  if (argv.raw.length) {
+    exec([`${argv.flags.dest}/cases`]);
+  } else {
+    process.stdout.write(`${argv.flags.dest}/cases`);
+  }
 } catch (e) {
   process.stderr.write(e.message);
   process.exit(1);
 }
+
+process.on('SIGINT', () => {
+  if (child) {
+    process.stdout.write(`\rClosing child process ${child.pid} ...\n`);
+
+    child.kill('SIGINT');
+  }
+
+  process.exit();
+});

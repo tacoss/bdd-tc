@@ -7,7 +7,9 @@
     "yadda-testcafe": "bin/cli"
   },
   "scripts": {
-    "test": "testcafe chrome:headless $(bin/cli -t 'tests/e2e/steps/*.js' -c tests/e2e/helpers)"
+    "build": "bin/cli -t 'tests/e2e/steps/*.js' -c tests/e2e/helpers --",
+    "test": "testcafe chrome:headless $(npm run build)",
+    "e2e": "npm run build -- testcafe chrome"
   },
   "keywords": [
     "testcafe",
