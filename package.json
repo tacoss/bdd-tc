@@ -1,7 +1,7 @@
 {
   "name": "yadda-testcafe",
-  "version": "1.0.0",
-  "description": "PoC: Testcafé codegen from Yadda features",
+  "version": "0.0.0",
+  "description": "Testcafé codegen from Yadda features",
   "main": "lib/compiler.js",
   "bin": {
     "yadda-testcafe": "bin/cli"
