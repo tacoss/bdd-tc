@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  chrome:
+    image: martinsthiago/chrome:64.0.3282.186
+    command: google-chrome http://somedom:9505/browser/connect
+    ports:
+      - 9505:9505
+      - 9506:9506
