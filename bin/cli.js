@@ -1,4 +1,5 @@
 const wargs = require('wargs');
+const glob = require('glob');
 
 const pwd = process.cwd();
 
@@ -18,6 +19,10 @@ const argv = wargs(process.argv.slice(2), {
 function toArray(value) {
   if (!value) {
     return [];
+  }
+
+  if (typeof value === 'string' && /[{*}]/.test(value)) {
+    return glob.sync(value);
   }
 
   return !Array.isArray(value)
