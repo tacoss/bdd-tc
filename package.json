@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "bin/cli -t 'tests/e2e/steps/*.js' -c tests/e2e/helpers --",
-    "test": "testcafe chrome:headless $(npm run build)",
-    "e2e": "npm run build -- testcafe chrome"
+    "test": "npx testcafe chrome:headless $(npm run build)",
+    "e2e": "npm run build -- npx testcafe chrome"
   },
   "keywords": [
     "testcafe",
@@ -33,8 +33,5 @@
     "lodash.template": "^4.4.0",
     "wargs": "^0.8.2",
     "yadda": "^2.0.0"
-  },
-  "devDependencies": {
-    "testcafe": "^0.23.2"
   }
 }

@@ -76,7 +76,7 @@ const compiler = require('../lib/compiler');
 
 try {
   compiler({
-    lang: argv.lags.lang,
+    lang: argv.flags.lang,
     srcDir: argv.flags.src,
     destDir: argv.flags.dest,
     copyFrom: toArray(argv.flags.copy),
