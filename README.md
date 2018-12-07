@@ -10,3 +10,8 @@ But instead of resolving steps on runtime we generate the code for usage on Test
 
 - `npm install`
 - `npm run e2e`
+
+Inspect the generated results from E2E snapshots:
+
+- `npm run ui`
+- `open generated/index.html`
