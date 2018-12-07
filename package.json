@@ -36,6 +36,7 @@
     "yadda": "^2.0.0"
   },
   "devDependencies": {
-    "testcafe": "^0.23.2"
+    "testcafe": "^0.23.2",
+    "testcafe-blink-diff": "^0.3.4"
   }
 }
