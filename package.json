@@ -7,7 +7,7 @@
     "yadda-testcafe": "bin/cli"
   },
   "scripts": {
-    "build": "bin/cli tests/e2e/features tests/e2e/generated -t tests/e2e/steps",
+    "build": "bin/cli tests/e2e/features",
     "test": "testcafe chrome:headless $(npm run build) --color",
     "e2e": "npm run build -- -- testcafe chrome --color"
   },

@@ -13,19 +13,18 @@ const argv = wargs(process.argv.slice(2), {
   },
 });
 
-const SRC = argv._.shift();
-const DEST = argv._.shift() || 'generated';
-
 const USAGE_INFO = `
 Usage:
   yadda-testcafe SRC [DEST] [...] -- [ARGS]
 
 Example:
-  yadda-testcafe e2e/features -t e2e/steps -- npx testcafe --color
+  yadda-testcafe e2e/features -- npx testcafe --color
 
 Input/Output:
   SRC          Features files or directory (default: ./features)
   DEST         Directory for generated cases (default: ./generated)
+
+  If only SRC is provided, then DEST and --steps are derived from there
 
 Options:
   -l, --lang   Yadda language, for l10n parsing
@@ -37,6 +36,13 @@ Options:
 if (argv.flags.help) {
   process.stdout.write(USAGE_INFO);
   process.exit();
+}
+
+const SRC = argv._[0] && path.resolve(argv._[0]);
+const DEST = argv._[1] || path.resolve(SRC, '../generated');
+
+if (argv._.length === 1 && !argv.flags.steps) {
+  argv.flags.steps = argv.flags.s = path.resolve(SRC, '../steps');
 }
 
 if (!SRC || !fs.existsSync(SRC)) {
