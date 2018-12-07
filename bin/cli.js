@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const pwd = process.cwd();
+const dir = path.basename(pwd);
 
 const argv = wargs(process.argv.slice(2), {
   alias: {
@@ -14,7 +15,7 @@ const argv = wargs(process.argv.slice(2), {
 });
 
 const SRC = argv._.shift();
-const DEST = argv._.shift() || '/tmp';
+const DEST = argv._.shift() || `/tmp/${dir}`;
 
 const USAGE_INFO = `
 Usage:
@@ -25,7 +26,7 @@ Example:
 
 Input/Output:
   SRC          Features files or directory (default: ./features)
-  DEST         Directory for generated tests (default: /tmp)
+  DEST         Directory for generated tests (default: /tmp/${dir})
 
 Options:
   -l, --lang   Yadda language, for l10n parsing
