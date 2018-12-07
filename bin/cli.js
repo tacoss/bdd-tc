@@ -12,6 +12,7 @@ const argv = wargs(process.argv.slice(2), {
     s: 'src',
     d: 'dest',
     c: 'copy',
+    l: 'lang',
     t: 'steps',
   },
 });
@@ -75,6 +76,7 @@ const compiler = require('../lib/compiler');
 
 try {
   compiler({
+    lang: argv.lags.lang,
     srcDir: argv.flags.src,
     destDir: argv.flags.dest,
     copyFrom: toArray(argv.flags.copy),
