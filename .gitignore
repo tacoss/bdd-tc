@@ -3,4 +3,5 @@
 .nyc_output
 coverage
 generated
+screenshots
 node_modules
