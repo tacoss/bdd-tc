@@ -9,4 +9,4 @@ But instead of resolving steps on runtime we generate the code for usage on Test
 ## I want to break free!
 
 - `npm install`
-- `npm test`
+- `npm run e2e`

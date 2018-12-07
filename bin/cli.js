@@ -26,6 +26,8 @@ Input/Output:
 
   If only SRC is provided, then DEST and --steps are derived from there
 
+  Extra ARGS are used, if provided, to spawn a child process with DEST appended
+
 Options:
   -l, --lang   Yadda language, for l10n parsing
   -a, --tags   Build only tests with these tags; it can be multiple
