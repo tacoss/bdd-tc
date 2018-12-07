@@ -11,8 +11,11 @@ cache:
 addons:
   chrome: stable
 
+before_script:
+  - testcafe --list-browsers
+
 script:
-  - "npm run build -- testcafe 'chrome:headless --disable-gpu --remote-debugging-port=9222 --remote-debugging-address=0.0.0.0' --skip-js-errors --assertion-timeout 30000"
+  - "npm run build -- testcafe chrome:headless --skip-js-errors --assertion-timeout 30000"
 
 notifications:
   email: false

@@ -1,3 +1,6 @@
+/* eslint space-before-function-paren: 0 */
+/* eslint object-shorthand: 0 */
+
 import pages from '../helpers/pages';
 
 let page;
@@ -10,19 +13,19 @@ export default {
   'Given open "$searchEngine" URL' (searchEngine) {
     page = pages[searchEngine];
 
-    await t
+    this
       .navigateTo(page.url)
       .expect(page.body.visible).ok();
   },
 
   'When I $find for "$searchQuery"' (searchQuery) {
-    await t
+    this
       .typeText(page.search.input, searchQuery)
       .click(page.search.submit);
   },
 
   'Then should I see "$searchResult"' (searchResult) {
-    await t
+    this
       .expect(page.search.output.innerText).contains(searchResult);
   },
 };
