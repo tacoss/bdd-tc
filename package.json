@@ -8,7 +8,6 @@
   },
   "scripts": {
     "build": "bin/cli -t 'tests/e2e/steps/*.js' -c tests/e2e/helpers --",
-    "test:ci": "testcafe --ports 9505,9506 remote:1 $(npm run build)",
     "test": "testcafe chrome:headless $(npm run build)",
     "e2e": "npm run build -- testcafe chrome"
   },
