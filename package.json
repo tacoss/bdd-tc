@@ -9,8 +9,8 @@
   "scripts": {
     "build": "bin/cli tests/features",
     "test": "testcafe chrome:headless $(npm run build) --color",
-    "e2e": "npm run build -- -- testcafe --take-snapshot $(git branch | awk '{print $2}') --color -S -s tests/screenshots chrome:headless",
-    "ui": "testcafe-blink-diff tests/screenshots --compare master:$(git branch | awk '{print $2}') --force -t 0.10"
+    "e2e": "npm run build -- -- testcafe --take-snapshot --color -S -s tests/screenshots chrome:headless",
+    "ui": "testcafe-blink-diff tests/screenshots --compare master:dev --force -t 0.10"
   },
   "keywords": [
     "testcafe",
@@ -38,6 +38,6 @@
   },
   "devDependencies": {
     "testcafe": "^0.23.2",
-    "testcafe-blink-diff": "^0.3.5"
+    "testcafe-blink-diff": "^0.3.6"
   }
 }
