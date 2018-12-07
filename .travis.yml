@@ -12,7 +12,7 @@ addons:
   chrome: stable
 
 install:
-  - npm install -g testcafe
+  - npm install -g npm testcafe
   - npm ci
 
 script:
