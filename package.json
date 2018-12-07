@@ -7,9 +7,10 @@
     "yadda-testcafe": "bin/cli"
   },
   "scripts": {
-    "build": "bin/cli tests/e2e/features",
+    "build": "bin/cli tests/features",
     "test": "testcafe chrome:headless $(npm run build) --color",
-    "e2e": "npm run build -- -- testcafe chrome --take-snapshot --color -S -s tests/e2e/screenshots"
+    "e2e": "npm run build -- -- testcafe --take-snapshot $(git branch | awk '{print $2}') --color -S -s tests/screenshots chrome:headless",
+    "ui": "testcafe-blink-diff tests/screenshots --compare master:$(git branch | awk '{print $2}') --force -t 0.10"
   },
   "keywords": [
     "testcafe",
