@@ -1,21 +1,52 @@
 const wargs = require('wargs');
 const glob = require('glob');
+const path = require('path');
+const fs = require('fs');
 
 const pwd = process.cwd();
 
 const argv = wargs(process.argv.slice(2), {
-  default: {
-    src: `${pwd}/tests/e2e`,
-    dest: `${pwd}/generated`,
-  },
   alias: {
-    s: 'src',
-    d: 'dest',
     c: 'copy',
     l: 'lang',
     t: 'steps',
   },
 });
+
+const SRC = argv._.shift();
+const DEST = argv._.shift() || '/tmp';
+
+const USAGE_INFO = `
+Usage:
+  yadda-testcafe SRC [DEST] [...] -- [ARGS]
+
+Example:
+  yadda-testcafe e2e/features -t e2e/steps -- npx testcafe --color
+
+Input/Output:
+  SRC          Features files or directory (default: ./features)
+  DEST         Directory for generated tests (default: /tmp)
+
+Options:
+  -l, --lang   Yadda language, for l10n parsing
+  -c, --copy   Files or directories to copy; it can be multiple
+  -t, --steps  Single step file, glob or directory; it can be multiple
+
+`;
+
+if (argv.flags.help) {
+  process.stdout.write(USAGE_INFO);
+  process.exit();
+}
+
+if (!SRC || !fs.existsSync(SRC)) {
+  const message = !SRC
+    ? 'Missing src'
+    : `Invalid src \`${path.relative(pwd, SRC)}\``;
+
+  process.stderr.write(`${message}, use --help for usage info\n`);
+  process.exit(1);
+}
 
 const onClose = process.version.split('.')[1] === '6' ? 'exit' : 'close';
 
@@ -77,19 +108,29 @@ const compiler = require('../lib/compiler');
 try {
   compiler({
     lang: argv.flags.lang,
-    srcDir: argv.flags.src,
-    destDir: argv.flags.dest,
+    srcDir: SRC,
+    destDir: DEST,
     copyFrom: toArray(argv.flags.copy),
-    stepFiles: toArray(argv.flags.steps),
+    stepFiles: toArray(argv.flags.steps).reduce((prev, cur) => {
+      if (fs.existsSync(cur) && fs.statSync(cur).isDirectory()) {
+        glob.sync('*.js', { cwd: cur }).forEach(file => {
+          prev.push(path.join(cur, file));
+        });
+      } else {
+        prev.push(cur);
+      }
+
+      return prev;
+    }, []),
   });
 
   if (argv.raw.length) {
-    exec([`${argv.flags.dest}/cases`]);
+    exec([`${DEST}/cases`]);
   } else {
-    process.stdout.write(`${argv.flags.dest}/cases`);
+    process.stdout.write(`${DEST}/cases`);
   }
 } catch (e) {
-  process.stderr.write(e.message);
+  process.stderr.write(`${e.message}, use --help for usage info\n`);
   process.exit(1);
 }
 
