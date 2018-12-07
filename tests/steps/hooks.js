@@ -28,11 +28,7 @@ export default {
     this.click(els[selectorName]);
   },
 
-  'Given an initial snapshot for "$snapshot"' (snapId) {
-    takeSnapshot(this, { as: snapId });
-  },
-
-  'Then should I take an snapshot for "$snapshot"' (snapId) {
+  '(?:Given an initial|Then should I take an) snapshot for "$snapshot"' (snapId) {
     takeSnapshot(this, { as: snapId });
   },
 };
