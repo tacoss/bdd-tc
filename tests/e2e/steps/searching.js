@@ -1,6 +1,3 @@
-/* eslint space-before-function-paren: 0 */
-/* eslint object-shorthand: 0 */
-
 import pages from '../helpers/pages';
 
 let page;
