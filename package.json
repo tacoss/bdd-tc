@@ -9,7 +9,7 @@
   "scripts": {
     "build": "bin/cli tests/e2e/features",
     "test": "testcafe chrome:headless $(npm run build) --color",
-    "e2e": "npm run build -- -- testcafe chrome --color"
+    "e2e": "npm run build -- -- testcafe chrome --take-snapshot --color -S -s tests/e2e/screenshots"
   },
   "keywords": [
     "testcafe",
@@ -37,6 +37,6 @@
   },
   "devDependencies": {
     "testcafe": "^0.23.2",
-    "testcafe-blink-diff": "^0.3.4"
+    "testcafe-blink-diff": "^0.3.5"
   }
 }
