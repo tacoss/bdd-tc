@@ -11,6 +11,10 @@ const els = {
 };
 
 export default {
+  matchers: {
+    prelude: '(?:Given an initial|Then should I take an)',
+  },
+
   before: {
     resize({ media }) {
       if (media && sizes[media]) {
@@ -28,7 +32,7 @@ export default {
     this.click(els[selectorName]);
   },
 
-  '(?:Given an initial|Then should I take an) snapshot for "$snapshot"' (snapId) {
+  '$prelude snapshot for "$snapshot"' (snapId) {
     takeSnapshot(this, { as: snapId });
   },
 };
