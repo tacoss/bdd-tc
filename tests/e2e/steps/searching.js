@@ -26,6 +26,7 @@ export default {
 
   'Then should I see "$searchResult"' (searchResult) {
     this
-      .expect(page.search.output.innerText).contains(searchResult);
+      .expect(page.search.output.innerText)
+      .contains(searchResult);
   },
 };
