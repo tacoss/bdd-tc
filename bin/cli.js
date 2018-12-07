@@ -4,19 +4,17 @@ const path = require('path');
 const fs = require('fs');
 
 const pwd = process.cwd();
-const dir = path.basename(pwd);
 
 const argv = wargs(process.argv.slice(2), {
   alias: {
     l: 'lang',
     a: 'tags',
-    c: 'copy',
     t: 'steps',
   },
 });
 
 const SRC = argv._.shift();
-const DEST = argv._.shift() || `/tmp/${dir}`;
+const DEST = argv._.shift() || 'generated';
 
 const USAGE_INFO = `
 Usage:
@@ -27,12 +25,11 @@ Example:
 
 Input/Output:
   SRC          Features files or directory (default: ./features)
-  DEST         Directory for generated tests (default: /tmp/${dir})
+  DEST         Directory for generated cases (default: ./generated)
 
 Options:
   -l, --lang   Yadda language, for l10n parsing
   -a, --tags   Build only tests with these tags; it can be multiple
-  -c, --copy   Files or directories to copy; it can be multiple
   -t, --steps  Single step file, glob or directory; it can be multiple
 
 `;
@@ -109,12 +106,17 @@ function exec(sources) {
 const compiler = require('../lib/compiler');
 
 try {
+  if (fs.existsSync(DEST)) {
+    const rimraf = require('rimraf');
+
+    rimraf.sync(DEST);
+  }
+
   compiler({
     lang: argv.flags.lang,
     srcDir: SRC,
     destDir: DEST,
     useTags: toArray(argv.flags.tags),
-    copyFrom: toArray(argv.flags.copy),
     stepFiles: toArray(argv.flags.steps).reduce((prev, cur) => {
       if (fs.existsSync(cur) && fs.statSync(cur).isDirectory()) {
         glob.sync('*.js', { cwd: cur }).forEach(file => {
@@ -129,9 +131,9 @@ try {
   });
 
   if (argv.raw.length) {
-    exec([`${DEST}/cases`]);
+    exec([DEST]);
   } else {
-    process.stdout.write(`${DEST}/cases`);
+    process.stdout.write(DEST);
   }
 } catch (e) {
   process.stderr.write(`${e.message}; use --help for usage info\n`);
