@@ -8,8 +8,9 @@ const dir = path.basename(pwd);
 
 const argv = wargs(process.argv.slice(2), {
   alias: {
-    c: 'copy',
     l: 'lang',
+    a: 'tags',
+    c: 'copy',
     t: 'steps',
   },
 });
@@ -30,6 +31,7 @@ Input/Output:
 
 Options:
   -l, --lang   Yadda language, for l10n parsing
+  -a, --tags   Build only tests with these tags; it can be multiple
   -c, --copy   Files or directories to copy; it can be multiple
   -t, --steps  Single step file, glob or directory; it can be multiple
 
@@ -111,6 +113,7 @@ try {
     lang: argv.flags.lang,
     srcDir: SRC,
     destDir: DEST,
+    useTags: toArray(argv.flags.tags),
     copyFrom: toArray(argv.flags.copy),
     stepFiles: toArray(argv.flags.steps).reduce((prev, cur) => {
       if (fs.existsSync(cur) && fs.statSync(cur).isDirectory()) {
@@ -131,7 +134,7 @@ try {
     process.stdout.write(`${DEST}/cases`);
   }
 } catch (e) {
-  process.stderr.write(`${e.message}, use --help for usage info\n`);
+  process.stderr.write(`${e.stack}, use --help for usage info\n`);
   process.exit(1);
 }
 
