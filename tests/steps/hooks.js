@@ -22,6 +22,7 @@ export default {
       }
     },
   },
+
   after: {
     snapshot() {
       takeSnapshot(this);
