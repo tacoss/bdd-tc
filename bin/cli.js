@@ -47,7 +47,7 @@ if (!SRC || !fs.existsSync(SRC)) {
     ? 'Missing src'
     : `Invalid src \`${path.relative(pwd, SRC)}\``;
 
-  process.stderr.write(`${message}, use --help for usage info\n`);
+  process.stderr.write(`${message}; use --help for usage info\n`);
   process.exit(1);
 }
 
@@ -134,7 +134,7 @@ try {
     process.stdout.write(`${DEST}/cases`);
   }
 } catch (e) {
-  process.stderr.write(`${e.stack}, use --help for usage info\n`);
+  process.stderr.write(`${e.message}; use --help for usage info\n`);
   process.exit(1);
 }
 
