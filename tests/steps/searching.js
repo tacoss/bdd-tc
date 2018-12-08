@@ -1,10 +1,23 @@
 import pages from '../helpers/pages';
 
+const sizes = {
+  desktop: [1024, 768],
+  tablet: [800, 600],
+};
+
 let page;
 
 export default {
   matchers: {
     find: '(?:search|query)',
+  },
+
+  before: {
+    resize: ({ media }) => async t => {
+      if (media && sizes[media]) {
+        await t.resizeWindow(...sizes[media]);
+      }
+    },
   },
 
   'Given open "$searchEngine" URL': searchEngine => async t => {

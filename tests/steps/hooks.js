@@ -1,11 +1,6 @@
 import { Selector } from 'testcafe';
 import { takeSnapshot } from 'testcafe-blink-diff';
 
-const sizes = {
-  desktop: [1024, 768],
-  tablet: [800, 600],
-};
-
 const els = {
   changeTitle: Selector('#change-title'),
 };
@@ -13,14 +8,6 @@ const els = {
 export default {
   matchers: {
     prelude: '(?:Given an initial|Then should I take an)',
-  },
-
-  before: {
-    resize: ({ media }) => async t => {
-      if (media && sizes[media]) {
-        await t.resizeWindow(...sizes[media]);
-      }
-    },
   },
 
   after: {
