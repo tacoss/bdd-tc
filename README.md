@@ -1,8 +1,7 @@
 # BDD-to-code
 
-[![NPM version](https://badge.fury.io/js/yadda-testcafe.png)](http://badge.fury.io/js/yadda-testcafe)
-[![travis-ci](https://api.travis-ci.org/pateketrueke/yadda-testcafe.svg)](https://travis-ci.org/pateketrueke/yadda-testcafe)
-
+[![NPM version](https://badge.fury.io/js/bdd-tc.png)](http://badge.fury.io/js/bdd-tc)
+[![travis-ci](https://api.travis-ci.org/pateketrueke/bdd-tc.svg)](https://travis-ci.org/pateketrueke/bdd-tc)
 
 > Transforms Yadda features into working Testcafé tests.
 
