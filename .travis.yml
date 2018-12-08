@@ -14,7 +14,7 @@ addons:
 
 before_script:
   - testcafe --list-browsers
-  - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/steps/*.js;'
+  - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/steps/*.js || true;'
 
 script:
   - "npm run build -- -- testcafe chrome:headless --color --skip-js-errors --assertion-timeout 30000"
