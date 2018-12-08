@@ -3,6 +3,9 @@ const glob = require('glob');
 const path = require('path');
 const fs = require('fs');
 
+const pkg = require('../package.json');
+
+const bin = Object.keys(pkg.bin)[0];
 const pwd = process.cwd();
 
 const argv = wargs(process.argv.slice(2), {
@@ -15,10 +18,10 @@ const argv = wargs(process.argv.slice(2), {
 
 const USAGE_INFO = `
 Usage:
-  yadda-testcafe SRC [DEST] [...] -- [ARGS]
+  ${bin} SRC [DEST] [...] -- [ARGS]
 
 Example:
-  yadda-testcafe e2e/features -- npx testcafe --color
+  ${bin} e2e/features -- npx testcafe --color
 
 Input/Output:
   SRC          Features files or directory (default: ./features)
@@ -40,7 +43,7 @@ if (argv.flags.help) {
   process.exit();
 }
 
-const SRC = argv._[0] && path.resolve(argv._[0]);
+const SRC = (argv._[0] && path.resolve(argv._[0])) || pwd;
 const DEST = argv._[1] || path.resolve(SRC, '../generated');
 
 if (argv._.length === 1 && !argv.flags.steps) {

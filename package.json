@@ -1,10 +1,10 @@
 {
-  "name": "yadda-testcafe",
+  "name": "bdd-tc",
   "version": "0.0.0",
-  "description": "Testcafé codegen from Yadda features",
+  "description": "Codegen from Yadda features",
   "main": "lib/compiler.js",
   "bin": {
-    "yadda-testcafe": "bin/cli"
+    "bdd-tc": "bin/cli"
   },
   "scripts": {
     "build": "bin/cli tests/features",
@@ -20,9 +20,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/agave/yadda-testcafe"
+    "url": "https://github.com/pateketrueke/bdd-tc"
   },
-  "bugs": "https://github.com/agave/yadda-testcafe/issues",
+  "bugs": "https://github.com/pateketrueke/bdd-tc/issues",
   "author": "Agave Lab <oss@agavelab.com> (https://agavelab.com)",
   "maintainers": [
     "Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)"
