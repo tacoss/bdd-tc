@@ -7,22 +7,22 @@ export default {
     find: '(?:search|query)',
   },
 
-  'Given open "$searchEngine" URL' (searchEngine) {
+  'Given open "$searchEngine" URL': searchEngine => async t => {
     page = pages[searchEngine];
 
-    this
+    await t
       .navigateTo(page.url)
       .expect(page.body.visible).ok();
   },
 
-  'When I $find for "$searchQuery"' (searchQuery) {
-    this
+  'When I $find for "$searchQuery"': searchQuery => async t => {
+    await t
       .typeText(page.search.input, searchQuery)
       .click(page.search.submit);
   },
 
-  'Then should I see "$searchResult"' (searchResult) {
-    this
+  'Then should I see "$searchResult"': searchResult => async t => {
+    await t
       .expect(page.search.output.innerText)
       .contains(searchResult);
   },

@@ -16,24 +16,24 @@ export default {
   },
 
   before: {
-    resize({ media }) {
+    resize: ({ media }) => async t => {
       if (media && sizes[media]) {
-        this.resizeWindow(...sizes[media]);
+        await t.resizeWindow(...sizes[media]);
       }
     },
   },
 
   after: {
-    snapshot() {
-      takeSnapshot(this);
+    snapshot: () => async t => {
+      await takeSnapshot(t);
     },
   },
 
-  'When I click on @$selector' (selectorName) {
-    this.click(els[selectorName]);
+  'When I click on @$selector': selectorName => async t => {
+    await t.click(els[selectorName]);
   },
 
-  '$prelude snapshot for "$snapshot"' (snapId) {
-    takeSnapshot(this, { as: snapId });
+  '$prelude snapshot for "$snapshot"': snapId => async t => {
+    await takeSnapshot(t, { as: snapId });
   },
 };
