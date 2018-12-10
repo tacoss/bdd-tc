@@ -14,7 +14,7 @@ addons:
 
 before_script:
   - testcafe --list-browsers
-  - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/steps/*.js || true;'
+  - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/e2e/steps/*.js || true;'
 
 script:
   - "npm run test:ci"
