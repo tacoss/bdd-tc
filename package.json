@@ -7,10 +7,10 @@
     "bdd-tc": "bin/cli"
   },
   "scripts": {
-    "build": "bin/cli tests/features",
+    "build": "bin/cli tests/e2e/features",
     "test": "testcafe chrome:headless $(npm run build) --color",
-    "e2e": "npm run build -- -- testcafe --take-snapshot --color -S -s tests/screenshots chrome:headless",
-    "ui": "testcafe-blink-diff tests/screenshots --compare master:dev --force -t 0.10"
+    "e2e": "npm run build -- -- testcafe --take-snapshot --color -S -s tests/e2e/screenshots chrome:headless",
+    "ui": "testcafe-blink-diff tests/e2e/screenshots --compare master:dev --force -t 0.10"
   },
   "keywords": [
     "testcafe",
@@ -37,6 +37,9 @@
     "yadda": "^2.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "testcafe": "^0.23.2",
     "testcafe-blink-diff": "^0.3.6"
   }
