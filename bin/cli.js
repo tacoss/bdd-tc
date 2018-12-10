@@ -1,3 +1,5 @@
+const { spawn } = require('child_process');
+
 const wargs = require('wargs');
 const glob = require('glob');
 const path = require('path');
@@ -76,8 +78,6 @@ function toArray(value) {
     ? [value]
     : value;
 }
-
-const { spawn } = require('child_process');
 
 function exec(sources) {
   const cmd = argv.raw.concat(sources);
