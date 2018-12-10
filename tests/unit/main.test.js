@@ -55,12 +55,12 @@ describe('compiler', () => {
       'e2e/steps/test.js': trim(`
         export default {
           before: {
-            all: () => async t => {},
+            all: () => t => {},
           },
           after: {
-            justOne: () => async t => {},
+            justOne: () => t => {},
           },
-          'When I test': () => async t => {},
+          'When I test': () => t => {},
         };
       `),
     });
