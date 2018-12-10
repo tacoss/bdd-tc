@@ -44,15 +44,35 @@ export default {
 ```
 
 Finally we can generate the test-files and execute them:
+
 ```bash
 $ bdd-tc e2e/features -- testcafe --color chrome:headless
 ```
 
 ### Steps
 
+Steps are _labeled_ functions that receive arguments and return actual test functions.
+
+Those calls are inlined on the generated tests, but its code is actually imported:
+
+
+```js
+import $step0 from '../steps/demo.js';
+
+fixture `Some description`;
+
+test(`Perform a single action`, async t => {
+  await $step0[`Given one step`]()(t);
+  await $step0[`When I run another step`]()(t);
+  await $step0[`Then I test for \$phrase`]("something specific")(t);
+});
+```
+
 ### Hooks
 
-Before and after hooks for tests can be defined too:
+Before and after hooks for tests can be defined too.
+
+They're are similar to step functions:
 
 ```js
 export default {
@@ -82,9 +102,7 @@ Scenario: Perform a single action
   Then I test for something specific
 ```
 
-Multiple hooks can be specified separated with commas.
-
-> Depending on the context `beforeEach/afterEach` or `before/after` is used automatically.
+> Depending on the context, `beforeEach/afterEach` or `before/after` is used automatically.
 
 ### Matchers
 
@@ -94,7 +112,7 @@ Additional `$matchers` can be defined within steps as follows:
 export default {
   matchers: {
     test: '(foo|bar)',
-    noMatch: '(?:[^\s]*)',
+    noMatch: '(?:[^\\s]*)',
   },
 
   'When ask for $test': test => async t => {
@@ -107,16 +125,43 @@ export default {
 };
 ```
 
-All non-matched placeholders will be captured as `(.+?)`, just like `$test`.
+Captures made from matchers will be passed as arguments, non-matched placeholders will be captured as `(.+?)` and passed too.
+
+> Use `(?:<PATTERN>)` to omit captured values from matched placeholders.
 
 ### Annotations
 
-## Development
+Built-in annotations are:
 
-- `npm install`
-- `npm run e2e`
+- `@before` &mdash; Setup `before/beforeEach` from features and scenarios.
+- `@after` &mdash; Setup `after/afterEach` from features and scenarios.
+- `@only` &mdash; Append `.only` on generated fixture/test calls.
+- `@skip` &mdash; Completely omit fixture/test from generated code.
+- `@url` &mdash; Append `.page` calls on generated fixture/test calls.
+
+> Any other annotation is keept as input-data and passed through invoked hooks.
+
+Multiple values using `[ ;,]` as separator will be treated as arrays, e.g.
+
+```feature
+@media=foo,bar
+```
+
+Complex values can be passed as JSON values, e.g.
+
+```feature
+@arr=["foo", "bar"]
+@obj={"baz": "buzz"}
+@str="Other value, with commas, etc."
+```
+
+## Demo/dev
+
+- `npm install` &mdash; Setup dependencies
+- `npm run e2e` &mdash; Run defined e2e tests
+- `npm run test:ci` &mdash; To run all unit-tests
 
 Inspect the generated results from E2E snapshots:
 
-- `npm run ui`
+- `npm run report:ui`
 - `open generated/index.html`
