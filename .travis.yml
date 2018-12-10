@@ -17,7 +17,11 @@ before_script:
   - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/steps/*.js || true;'
 
 script:
+  - "npm run test:ci"
   - "npm run build -- -- testcafe chrome:headless --color --skip-js-errors --assertion-timeout 30000"
+
+after_success:
+  - "npm run codecov"
 
 notifications:
   email: false

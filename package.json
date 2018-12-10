@@ -8,9 +8,22 @@
   },
   "scripts": {
     "build": "bin/cli tests/e2e/features",
-    "test": "testcafe chrome:headless $(npm run build) --color",
+    "dev": "npm test -- -w",
+    "lint": "eslint bin lib tests",
+    "test": "npm run test:unit --",
+    "test:ci": "npm run coverage:all && npm run report -- -r lcov",
+    "test:e2e": "testcafe chrome:headless $(npm run build) --color",
+    "test:all": "npm run test:run tests/unit && npm run report -- -r html",
+    "test:run": "NODE_ENV=test _mocha --exit --recursive -bR spec",
+    "test:unit": "npm run test:run tests/unit --",
+    "coverage": "nyc -x '**/tests/**' -x '**/*.test.js'",
+    "coverage:all": "npm run coverage -- npm run test:all",
+    "coverage:unit": "npm run coverage -- npm run test:unit",
+    "codecov": "codecov --file=coverage/lcov.info -e TRAVIS_NODE_VERSION",
     "e2e": "npm run build -- -- testcafe --take-snapshot --color -S -s tests/e2e/screenshots chrome:headless",
-    "ui": "testcafe-blink-diff tests/e2e/screenshots --compare master:dev --force -t 0.10"
+    "report:ui": "testcafe-blink-diff tests/e2e/screenshots --compare master:dev --force -t 0.10",
+    "report": "nyc report",
+    "pretest": "npm run lint"
   },
   "keywords": [
     "testcafe",
@@ -39,8 +52,10 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
+    "mock-fs": "^4.7.0",
     "nyc": "^13.1.0",
     "testcafe": "^0.23.2",
-    "testcafe-blink-diff": "^0.3.6"
+    "testcafe-blink-diff": "^0.3.6",
+    "testdouble": "^3.9.1"
   }
 }
