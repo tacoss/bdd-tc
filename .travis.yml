@@ -4,6 +4,7 @@ node_js:
   - 6
   - 9
   - 11
+  - 12
 
 cache:
   directories:
@@ -13,7 +14,6 @@ addons:
   chrome: stable
 
 before_script:
-  - testcafe --list-browsers
   - '[[ "$(node -v)" =~ v6 ]] && ./sync.sh tests/e2e/steps/*.js || true;'
 
 script:
