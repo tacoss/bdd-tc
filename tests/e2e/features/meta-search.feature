@@ -1,5 +1,3 @@
-@skip
-
 Feature: Search Engines
 
 Scenario: Searching for "[VALUE]" on [ENGINE]

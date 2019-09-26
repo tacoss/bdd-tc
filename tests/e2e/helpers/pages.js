@@ -6,7 +6,7 @@ const Google = {
   search: {
     input: Selector('input[type=text]'),
     submit: Selector('input[name=btnK]'),
-    output: Selector('#ires'),
+    output: Selector('#center_col'),
   },
 };
 

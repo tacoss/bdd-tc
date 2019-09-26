@@ -12,7 +12,7 @@
     "lint": "eslint bin lib tests",
     "test": "npm run test:unit --",
     "test:ci": "npm run coverage:all && npm run report -- -r lcov",
-    "test:e2e": "testcafe chrome:headless $(npm run build) --color",
+    "test:e2e": "testcafe chrome:headless $(npm run build | tail -1) --color",
     "test:all": "npm run test:run tests/unit && npm run report -- -r html",
     "test:run": "NODE_ENV=test _mocha --exit --recursive -bR spec",
     "test:unit": "npm run test:run tests/unit --",
@@ -20,7 +20,7 @@
     "coverage:all": "npm run coverage -- npm run test:all",
     "coverage:unit": "npm run coverage -- npm run test:unit",
     "codecov": "codecov --file=coverage/lcov.info -e TRAVIS_NODE_VERSION",
-    "e2e": "npm run build -- -- testcafe --take-snapshot --color -S -s tests/e2e/screenshots chrome:headless",
+    "e2e": "npm run build -- -- testcafe --debug-on-fail --take-snapshot --color -S -s tests/e2e/screenshots ${BROWSER:-chrome}",
     "report:ui": "testcafe-blink-diff tests/e2e/screenshots --compare master:dev --force -t 0.10",
     "report": "nyc report",
     "pretest": "npm run lint"
