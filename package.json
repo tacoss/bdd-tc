@@ -33,9 +33,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pateketrueke/bdd-tc"
+    "url": "https://github.com/tacoss/bdd-tc"
   },
-  "bugs": "https://github.com/pateketrueke/bdd-tc/issues",
+  "bugs": "https://github.com/tacoss/bdd-tc/issues",
   "author": "Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)",
   "license": "MIT",
   "dependencies": {
