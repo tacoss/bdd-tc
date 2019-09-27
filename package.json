@@ -51,9 +51,9 @@
     "mocha": "^6.2.0",
     "mock-fs": "^4.7.0",
     "nyc": "^14.1.1",
-    "testcafe": "^1.5.0",
     "open": ">=6.0.0",
-    "testcafe-blink-diff": "^0.3.6",
+    "testcafe": "^1.5.0",
+    "testcafe-blink-diff": "^0.3.8",
     "testdouble": "^3.9.1"
   }
 }
