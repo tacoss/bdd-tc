@@ -4,7 +4,7 @@ const Google = {
   url: 'http://google.com',
   body: Selector('body'),
   search: {
-    input: Selector('input[type=text]'),
+    input: Selector('input[name=q]'),
     submit: Selector('input[name=btnK]'),
     output: Selector('#center_col'),
   },
