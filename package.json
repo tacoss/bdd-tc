@@ -12,7 +12,7 @@
     "lint": "eslint bin lib tests",
     "test": "npm run test:unit --",
     "test:ci": "npm run coverage:all && npm run report -- -r lcov",
-    "test:e2e": "testcafe chrome:headless $(npm run build | tail -1) --color",
+    "test:e2e": "testcafe chrome:headless $(npm run build | tail -1) --color --skip-js-errors",
     "test:all": "npm run test:run tests/unit && npm run report -- -r html",
     "test:run": "NODE_ENV=test _mocha --exit --recursive -bR spec",
     "test:unit": "npm run test:run tests/unit --",
