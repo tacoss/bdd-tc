@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { takeSnapshot } from 'testcafe-blink-diff';
+import { takeSnapshot } from '../../..';
 
 const els = {
   changeTitle: Selector('#change-title'),
