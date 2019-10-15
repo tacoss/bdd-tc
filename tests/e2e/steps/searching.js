@@ -31,7 +31,8 @@ export default {
   'When I $find for "$searchQuery"': searchQuery => async t => {
     await t
       .typeText(page.search.input, searchQuery)
-      .click(page.search.submit);
+      .click(page.search.submit)
+      .wait(500);
   },
 
   'Then should I see "$searchResult"': searchResult => async t => {
