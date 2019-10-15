@@ -14,7 +14,7 @@ addons:
 
 script:
   - "npm run test:ci"
-  - "npm run build -- -- testcafe chrome:headless --color --skip-js-errors --assertion-timeout 30000"
+  - "npm run test:e2e"
 
 after_success:
   - "npm run codecov"
