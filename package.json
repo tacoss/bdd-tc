@@ -31,6 +31,10 @@
     "yadda",
     "bdd"
   ],
+  "files": [
+    "bin/*",
+    "lib/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tacoss/bdd-tc"
