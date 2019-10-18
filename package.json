@@ -58,5 +58,8 @@
     "open": ">=6.0.0",
     "testcafe": "^1.5.0",
     "testdouble": "^3.9.1"
+  },
+  "peerDependencies": {
+    "testcafe": "^1.5.0"
   }
 }
