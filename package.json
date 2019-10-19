@@ -51,7 +51,7 @@
     "json-schema-faker": "^0.5.0-rc22",
     "lodash.template": ">=4.5.0",
     "rimraf": "^3.0.0",
-    "testcafe-blink-diff": "^0.3.13",
+    "testcafe-blink-diff": "^0.3.14",
     "wargs": "^0.8.2",
     "yadda": "^2.0.0"
   },
