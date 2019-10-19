@@ -69,7 +69,7 @@ describe('compiler', () => {
       srcDir: 'e2e/features',
       destDir: 'tmp/tests/generated',
       stepFiles: ['e2e/steps/test.js'],
-    });
+    }, true);
 
     expect(td.explain(fs.outputFileSync).callCount).to.eql(1);
 
