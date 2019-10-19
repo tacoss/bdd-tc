@@ -1,14 +1,53 @@
-// FIXME: add common generators for simple values...
+const JSF = require('json-schema-faker');
+const faker = require('faker');
+const Chance = require('chance');
+
+const defaults = {
+  random: Math.random,
+  useDefaultValue: false,
+  alwaysFakeOptionals: false,
+};
+
+const number = JSF.random.number;
+const randexp = JSF.random.randexp;
+const shuffle = JSF.random.shuffle;
+const date = JSF.random.date;
+const pick = JSF.random.pick;
+const chance = new Chance();
+
+JSF.extend('faker', () => faker);
+JSF.extend('chance', () => chance);
+
+function jsf(schema, options) {
+  JSF.option(Object.assign({}, options, defaults));
+
+  return JSF.generate(schema);
+}
+
+function gen(typeOf) {
+  if (typeOf instanceof RegExp) return randexp(typeOf.source);
+  if (typeOf === String) return jsf({ type: 'string' });
+  if (typeOf === Boolean) return jsf({ type: 'boolean' });
+  if (typeOf === Number) return jsf({ type: 'number' });
+  if (typeOf === Array) return jsf({ type: 'array' });
+  if (typeOf === Object) return jsf({ type: 'object' });
+
+  return jsf({ type: ['string', 'number', 'integer', 'object', 'array', 'boolean', 'null'] });
+}
 
 function oneOf(dataset, whenField, matchesValue) {
   return dataset.find(x => x[whenField] === matchesValue);
 }
 
-function pick(dataset) {
-  return dataset[Math.floor(Math.random() * dataset.length)];
-}
-
 module.exports = {
-  oneOf,
+  randexp,
+  number,
+  shuffle,
+  date,
   pick,
+  oneOf,
+  gen,
+  jsf,
+  faker,
+  chance,
 };
