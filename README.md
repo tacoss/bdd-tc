@@ -140,12 +140,12 @@ Built-in annotations are:
 
 - `@xsnapshot` &mdash; Unique for features, disables any `@snapshot` from scenarios below
 - `@snapshot` &mdash; Unique for scenarios, it'll take snapshots after each step!
-- `@before` &mdash; Setup `before/beforeEach` from features and scenarios.
-- `@after` &mdash; Setup `after/afterEach` from features and scenarios.
-- `@only` &mdash; Append `.only` on generated fixture/test calls.
-- `@skip` &mdash; Completely omit fixture/test from generated code.
-- `@page` &mdash; Optional pathame, used only if `url()` is a function
-- `@url` &mdash; Append `.page` calls on generated fixture/test calls.
+- `@before` &mdash; Setup `before/beforeEach` from features and scenarios
+- `@after` &mdash; Setup `after/afterEach` from features and scenarios
+- `@only` &mdash; Append `.only` on generated fixture/test calls
+- `@skip` &mdash; Completely omit fixture/test from generated code
+- `@page` &mdash; Optional pathame, used only if `url()` is setup
+- `@url` &mdash; Append `.page` calls on generated fixture/test calls
 
 Given `@snapshost` value is passed as `takeSnapshot`'s selector option, so it can be an array, in which case will fallback until one selector matches/exists.
 
