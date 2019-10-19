@@ -138,12 +138,15 @@ Captures made from matchers will be passed as arguments, non-matched placeholder
 
 Built-in annotations are:
 
+- `@snapshot` &mdash; Unique for scenarios, it'll take snapshots after each step!
 - `@before` &mdash; Setup `before/beforeEach` from features and scenarios.
 - `@after` &mdash; Setup `after/afterEach` from features and scenarios.
 - `@only` &mdash; Append `.only` on generated fixture/test calls.
 - `@skip` &mdash; Completely omit fixture/test from generated code.
 - `@page` &mdash; Optional pathame, used only if `url()` is a function
 - `@url` &mdash; Append `.page` calls on generated fixture/test calls.
+
+Given `@snapshost` value is passed as `takeSnapshot`'s selector option, so it can be an array, in which case will fallback until one selector matches/exists.
 
 > Any other annotation is keept as input-data and passed through invoked hooks.
 
@@ -176,8 +179,18 @@ In order to assist you during writing steps, you can leverage on:
 
 Importing the `bdd-tc/matchers` module you gain access to:
 
-- `oneOf(dataset, whereField, fieldValue)` &mdash; Find item on dataset
-- `pick(dataset)` &mdash; Pick any value from given dataset
+- `jsf(schema[, options])` &mdash; Generate one or many samples from given JSON-Schema<sup>1</sup>
+- `faker[...]` &mdash; Faker.js instance - [see demo](https://cdn.rawgit.com/Marak/faker.js/master/examples/browser/index.html)
+- `chance[...]` &mdash; Chance.js instance - [see docs](https://chancejs.com/)
+- `gen([type[, schema]])` &mdash; Generate a sample based on any given type, additional JSON-Schema is applied if given
+- `date([step])` &mdash; Random `Date` object, given optional step: `seconds`, `minutes`, `hours`, `days`, `months` or `years`
+- `pick(dataset)` &mdash; Pick any value from given dataset, even work with strings!
+- `oneOf(dataset, whereField, fieldValue)` &mdash; Find any item on dataset that matches field/value
+- `number([min[, max]])` &mdash; Returns a random number within min/max boundaries
+- `randexp(regexp)` &mdash; Return a string generated from any given `RegExp`
+- `shuffle(dataset)` &mdash; Copy, randomize and returns any given dataset
+
+> <sup>1</sup> We're using [json-schema-faker](https://www.npmjs.com/package/json-schema-faker) under the hood to generate those.
 
 ## Demo/dev
 
