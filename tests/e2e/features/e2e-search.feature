@@ -1,3 +1,4 @@
+@xsnapshot
 @before=resize
 @url=https://e2e-playground.glitch.me/
 

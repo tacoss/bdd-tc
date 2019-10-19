@@ -1,3 +1,4 @@
+@xsnapshot
 Feature: Demo tests
 
 Scenario: Open Google and search for "agavelab"

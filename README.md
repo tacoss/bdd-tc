@@ -138,6 +138,7 @@ Captures made from matchers will be passed as arguments, non-matched placeholder
 
 Built-in annotations are:
 
+- `@xsnapshot` &mdash; Unique for features, disables any `@snapshot` from scenarios below
 - `@snapshot` &mdash; Unique for scenarios, it'll take snapshots after each step!
 - `@before` &mdash; Setup `before/beforeEach` from features and scenarios.
 - `@after` &mdash; Setup `after/afterEach` from features and scenarios.
