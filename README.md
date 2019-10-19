@@ -85,12 +85,17 @@ export default {
   after: {
     // etc.
   },
+
+  // use @path as input
+  url(path = '/') {
+    return process.env.BASE_URL + path;
+  },
 };
 ```
 
 Now you can reference them with `@before` and `@after` annotations respectively:
 
-```feature
+```behat
 @after=doSomething
 Feature: Some description
 
@@ -137,23 +142,42 @@ Built-in annotations are:
 - `@after` &mdash; Setup `after/afterEach` from features and scenarios.
 - `@only` &mdash; Append `.only` on generated fixture/test calls.
 - `@skip` &mdash; Completely omit fixture/test from generated code.
+- `@page` &mdash; Optional pathame, used only if `url()` is a function
 - `@url` &mdash; Append `.page` calls on generated fixture/test calls.
 
 > Any other annotation is keept as input-data and passed through invoked hooks.
 
 Multiple values using `[ ;,]` as separator will be treated as arrays, e.g.
 
-```feature
+```behat
 @media=foo,bar
 ```
 
 Complex values can be passed as JSON values, e.g.
 
-```feature
+```behat
 @arr=["foo", "bar"]
 @obj={"baz": "buzz"}
 @str="Other value, with commas, etc."
 ```
+
+### Working with steps
+
+In order to assist you during writing steps, you can leverage on:
+
+- `takeSnapshot(...)` &mdash; Calls the same method from [testcafe-blink-diff](https://www.npmjs.com/package/testcafe-blink-diff)
+- `useSelectors(obj)` &mdash; Object containing `Selector(...)` definitions, can be nested
+- `useFixtures(obj)` &mdash; Object containing any values as fixtures, can be nested
+- `getVal(key)` &mdash; Validate and return value from registered fixtures, see above
+- `getEl(key)` &mdash; Validate and return selector from registered ones, see above
+- `$(...)` &mdash; Shortcut for `Selector(...)`, same options as original call
+
+### Working with fixtures
+
+Importing the `bdd-tc/matchers` module you gain access to:
+
+- `oneOf(dataset, whereField, fieldValue)` &mdash; Find item on dataset
+- `pick(dataset)` &mdash; Pick any value from given dataset
 
 ## Demo/dev
 
