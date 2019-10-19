@@ -1,6 +1,6 @@
 {
   "name": "bdd-tc",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Codegen from Yadda features",
   "main": "lib/helpers.js",
   "bin": {
