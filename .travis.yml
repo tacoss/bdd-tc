@@ -2,8 +2,7 @@ language: node_js
 
 node_js:
   - 9
-  - 11
-  - 12
+  - 10
 
 cache:
   directories:
@@ -11,6 +10,9 @@ cache:
 
 addons:
   chrome: stable
+
+before_script:
+  - "npm i -g testcafe"
 
 script:
   - "npm run test:ci"
