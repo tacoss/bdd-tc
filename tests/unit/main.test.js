@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const td = require('testdouble');
 const mockFs = require('mock-fs');
 const { expect } = require('chai');
+const matchers = require('../../matchers');
 const compiler = require('../../lib/compiler');
 
 function trim(code) {
@@ -83,5 +84,11 @@ describe('compiler', () => {
     expect(buffer).to.to.match(/await.*\[`When I test`\]\(\)\(t\)/);
     expect(buffer).to.contain('before.all({"top":["foo","bar"]})(t)');
     expect(buffer).to.contain(`after.justOne(${data})(t)`);
+  });
+});
+
+describe('matchers', () => {
+  it('should run generators through JSF', () => {
+    expect(matchers.jsf({ type: 'string', faker: 'internet.email' })).includes('@');
   });
 });
