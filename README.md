@@ -1,7 +1,8 @@
 # BDD-to-code
 
-[![NPM version](https://badge.fury.io/js/bdd-tc.png)](http://badge.fury.io/js/bdd-tc)
-[![travis-ci](https://api.travis-ci.org/tacoss/bdd-tc.svg)](https://travis-ci.org/tacoss/bdd-tc)
+[![NPM version](https://badge.fury.io/js/bdd-tc.svg)](http://badge.fury.io/js/bdd-tc)
+[![codecov](https://codecov.io/gh/tacoss/bdd-tc/branch/master/graph/badge.svg)](https://codecov.io/gh/tacoss/bdd-tc)
+[![Build status](https://github.com/tacoss/bdd-tc/workflows/build/badge.svg)](https://github.com/tacoss/bdd-tc/actions)
 
 > Transforms Yadda features into working Testcafé tests.
 
