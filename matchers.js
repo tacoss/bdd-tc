@@ -1,4 +1,4 @@
-const JSF = require('json-schema-faker').default;
+const JSF = require('json-schema-faker');
 const faker = require('faker');
 const Chance = require('chance');
 
