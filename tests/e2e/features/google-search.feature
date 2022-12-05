@@ -5,7 +5,7 @@ Scenario: Open Google and search for "agavelab"
 
   Given open "Google" URL
   When I search for "agavelab"
-  Then should I see "Agave Lab: Home"
+  Then should I see "Agave Lab: We Build"
 
 Scenario: Open Google and search for "testcafe.js"
 
